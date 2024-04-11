@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
     public TextMeshProUGUI moveText;
+    public GameObject loseText;
     private Vector3 prevPosition;
 
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
         count = 0;
         SetCountText();
         winTextObject.SetActive(false);
+        loseText.SetActive(false);
     }
 
     private void Update() 
@@ -49,6 +51,13 @@ public class PlayerController : MonoBehaviour
            SetCountText();
        }
        count = count + 1;
+
+        if(other.gameObject.CompareTag("Anti-Pickup"))
+        {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+            loseText.gameObject.SetActive(true);
+        }
     }
 
 
